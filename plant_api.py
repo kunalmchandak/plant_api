@@ -2,7 +2,6 @@ from fastapi import FastAPI, HTTPException, UploadFile, File, Form
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import uvicorn
-import plant_model
 import shutil
 import tempfile
 import os
@@ -149,9 +148,6 @@ def predict_file(crop_name: str = Form(...), image: UploadFile = File(...) ):
         return {"result": result, "confidence": round(confidence * 100, 2)}
     except Exception as e:
         return {"error": str(e)}
-
-if __name__ == "__main__":
-    uvicorn.run("plant_api:app", host="192.168.22.243", port=8000, reload=True)
 
 """
 Example curl command to test POST endpoint:
